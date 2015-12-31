@@ -3,8 +3,32 @@
 }
 
 
+
+
+
 .cxseries_name {
 	font-size: 1.5em;
+}
+
+.cxseries_date {
+	font-size: 1.0em;
+	font-weight:bold;
+}
+
+
+.cxseries_race_sponsoredby {
+	font-style: italic;
+}
+
+.cxseries_race_details {
+	.cxseries_date, .cxseries_location {
+		font-size: 1.5em;
+	}
+}
+
+
+.cxseries_race_links {
+	margin-bottom: .25em;
 }
 
 .cxseries_next_race {
