@@ -9,7 +9,7 @@ addons:
   apt:
     packages:
     - sshpass
-  ssh_known_hosts: $DEPLOY_HOST
+  ssh_known_hosts: thelocust.org
 cache:
   directories:
   - bower_components
