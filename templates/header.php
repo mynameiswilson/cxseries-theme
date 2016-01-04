@@ -2,7 +2,7 @@
   <div class="container">
 <?php /*    <a class="brand" href="<?= esc_url(home_url('/')); ?>"><?php bloginfo('name'); ?></a> */ ?>
 
-    <?php if get_theme_mod('cxseries_logo') : ?>
+    <?php if (get_theme_mod('cxseries_logo')) : ?>
         <div class='site-logo'>
             <a href='<?php echo esc_url(home_url('/')); ?>' title='<?php echo esc_attr(get_bloginfo('name', 'display')); ?>' rel='home'><img style="max-height: <?php echo get_theme_mod('cxseries_logo_height') ?>px" src='<?php echo esc_url(get_theme_mod('cxseries_logo')); ?>' alt='<?php echo esc_attr(get_bloginfo('name', 'display')); ?>'></a>
         </div>
@@ -17,7 +17,7 @@
 
     <nav class="nav-primary">
       <?php
-      if has_nav_menu('primary_navigation') :
+      if (has_nav_menu('primary_navigation')) :
         wp_nav_menu(['theme_location' => 'primary_navigation', 'menu_class' => 'nav nav-tabs']);
       endif;
       ?>
