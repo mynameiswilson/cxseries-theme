@@ -1,27 +1,41 @@
 sudo: false
 language: php
 php:
-  - 5.6
-
+- 5.6
 matrix:
   allow_failures:
-    - php: nightly
-
+  - php: nightly
+addons:
+  apt:
+    packages:
+    - sshpass
 cache:
   directories:
-    - bower_components
-    - node_modules
-
+  - bower_components
+  - node_modules
 install:
-  - npm install -g npm@latest
-  - npm install -g bower gulp jscs
-  - npm install
-  - composer self-update && composer --version
-  - export PATH="$HOME/.composer/vendor/bin:$PATH"
-  - composer global require squizlabs/php_codesniffer
-
+- npm install -g npm@latest
+- npm install -g bower gulp jscs
+- npm install
+- composer self-update && composer --version
+- export PATH="$HOME/.composer/vendor/bin:$PATH"
+- composer global require squizlabs/php_codesniffer
 script:
-  - npm run build
-  - npm run jshint
-  - npm run jscs
-  - phpcs --standard=ruleset.xml --extensions=php -n -s .
+- npm run build
+- npm run jshint
+- npm run jscs
+- phpcs --standard=ruleset.xml --extensions=php -n -s .
+- gulp --production
+after_success:
+    - mkdir build
+    - mv * build
+    - tar -czf package.tgz build
+    - export SSHPASS=$DEPLOY_PASS
+    - sshpass -e scp package.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
+    - sshpass -e ssh $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy.sh
+env:
+  global:
+  - secure: ktDjnTBDW7P1UnkucqGmBb5M3lU4HL3lj3HLiSGTZFC1U4tS/HuI9tuepazun+3zIw08TL5mVLKDWXrNzcozOX4cTUJj2ni5kb2HUykWnrQ5ogGePFyecNdYe+IXJw5eSKp+RvA25SQV0lopDih5iF2b6ucKiHziludupmc5Gq7RPbIN/6e4ZY5EXYSNoqEif3BY5wlQc6oAQzWLa/o3MAx8ChD26y3PfOqVGuQWIP1W0P6vHZVA6zEfV7D9c075K/GMunBl7wFPxRwwqjigHzZsv9BeYXCWGNq8oitncrqdvp7jpFCN69DpqVENCSfeTXggEajGCfeNQtQ02fF+NWtUSy7PZaAXQsRMtVcotZdC+2GV5VH9rjh10uTL3vdCqsqwM4FUeBq47QKBKnsdLxk14SkDKOlYqITjM3pdnoHMs4tVyv3qGcLdvaIbfcf+bP5J8L5xmAw6+Tjx5quWEXmOe+nmxngMBxAh0YBXWIn55b+b6Mt9SAScgNyNr2mLBr71kY2CX3N/vx5Z/DlLjTWFMGaR9gCNxdH1rTInaff29k+AUC/BcbF8JWK/koTozWe5B3q5M2W1DytNA7OBA991dnuaLgxrXCF09cNG8Wp5/T4GxzaNLdKuwm0GwLIc2WC3RMTSBkVi3NMuKWmSFt7KyqrmYFd3DV4utQAKz0U=
+  - secure: SmE5mTPbHc/OQIiZZwaHt7+hlE8wxl3ui8JjeNhgyUcACzp4I9coL/KUOv8G9+55ETh6om92tmPR8QCU+QEZwt6o152slUuq+WrKTmVDG/wXIRxQx27ng+EHZZ9Dfmv3l1BTDmn21IBYe+uMpEFtrSwR44G65OC2+u3bowolGH13tGXpzp2TxEhdvhqHLR4tzTRQTCEdu/mMuTUjSOcMNCJK4CJrWe815UVUSsBriqsIpMuGFLqig05AFTENqcW3kTXeJbH89AQqzRoaFOc1BRQRT1diRQSz2gmn0uWh2SXUBPj2MFlEeuYyVQap8HrTRSzcW8scqfDabiku0YrMPAf9QL7HUq1q70UpOiFbhFj5eIRgJvC8rN0pJa79+8Yj+awVD2BfyZPkMCAoDQ1V6wPzEmw4Fuj+lxCmQB1i6axxtr8BBZzRc/Z4fWERYxEw2Zy80slf+5RAt7XngZJ6dGrqPVzUEBb7NMMUMQG0GZziMM/n+BJzBrrcx9Xfp7b/G37MZ5Ic6g62j2RgJf/q+PHdIdEDFsrlGgkSVOeUJ0XREQrtw6Dt5mBa/o6MvEUcZGsYZw8hOu1YB+YuFu0V9qLrFAJL3XVZsLiwU7s+mvYi3rx1CWAMnHTEEq8K9PYT1AZkvyk6QdPjOmZFhaMeRhl+s4blBx7rfz/+nPWHl54=
+  - secure: f2W3OnO7t2VMYOAIBK1U2l7f/O40uta9kQPIinx5mKytCOy6MnBz54NLYIpptseg+n+fyD50s68NTRX2aDtyw7Fcm0SNDL6JpFzLDgpTTJpMGHCkzLn0FkGYO7yjnUip4DDJzmu6QsWnZRI/lRyqXjZdWEKHvZmv3BnAOAxBlYnEJ74bE2WwXy1nKgfEwNP5lT172jPAR+kDGw1YCwl+thssVIuiLj7jj2hJ5lAgMzCkcNAUAvrYCru6FUpSdwqR8pasNHUBrlhdjdSmzzB1yF5rZT/bVX77lspGJK4AGK59duIZCPjwiMO2fvlDMFdC3yDhNh1ar8a9fccp/S3/t2F9ixworl/aCLHBGeC4glaTn+w3EqjzAliYWpIvUE4MiYGyNJ0nyAa1MqG4wVip/YO5F3Tf/EOJb/+pTf/+cwVf1kv99H0Ua99vToFkTLUbIbUT7zHRD/qXF0NS8GjCYkvAkLZonaqYlxD6EtCb6GkFf7fPylvSfLxdoMnhEzn8pFRjgu03+wdHRq1UqhrjiQAdjpX5Z07Rga5qKYovSr4hV+X/boIXmhyCyObBV6PbSU3BdNxqKBB6KBGB3VK1rIZgFFcDBy8DVL1H7s/59Q1W65qEjciMTO9WUPnsEgbGnnfzE4L9zxgGIwB38EOqa1tNnqVx+oNLmCTBZuWYn/s=
+  - secure: aM1whxNY4rwJjClYpYQxaWlBi+ex2PCSNTmB4w8H5zlCxhRN+7zJifG+Ekje+Da8Q+EFuj8XlOYY+rtD6kmn+TIU8oS+TapV+O7j31U1NviAMle47c36ZwKTjlzBE4YQ2X97mYSg77BydaCUeLYpFogVlnuY+dxP/muaH0i8lExvjte/DgZUFvEgRj9AECQaStDo+egtkMOoK4Od/EaPxHVKFOicbVMCPh67cBeAfqkXOf7mBq54ijO/ukzB8HscpjNKR+b/Ge3WojblsufvHyqXrYlWuhb/4v+vXXw28kDMG684uykCEncOz2M9TFYteL0hOCwz0Oq4+jNPSoTaiT3LaLx+apOTmnPun/NTvd/FEaSL1xw9GQJj2sabEwYXn7t0msIMhDIjYjsIgq7rx3C4AXFqYs0nzLICi6KfX3dpgp04IcN4IDjc3DNOUulndPCAPNqt9BV+Q9EiQdDj9FT8TQQwHmxi1cQWhUB0BXO4nrI8Ey6nKHqOy6i2MI+Eh3dtLNDowDq/HEfEtkUoZAjM0ZSz7fHlaeTyySBYVw4RHTG6jwsWKQXTf+M9qaFuY8rw5TJXh+6/oGJ3Ya4YiHy1ZN0wh8XBaTcgQEN5pAkrZCoGSt2tWTlpKSslRSwPr0dNRNi3xiHlbLsFpoPWht+bhrTEYQLKn/dRQHLrUv8=
