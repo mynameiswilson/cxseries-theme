@@ -34,14 +34,14 @@ add_filter('excerpt_more', __NAMESPACE__ . '\\excerpt_more');
 
 
 /**
- * 
+ *
  * Add "active" class for bootstrap where current_page_item is applied in WP
  */
-function nav_menu_css_class ($classes, $item) {
-    if (in_array('current-menu-item', $classes) ){
-        $classes[] = 'active ';
-    }
-    return $classes;
+function nav_menu_css_class($classes, $item) {
+  if (in_array('current-menu-item', $classes)) {
+      $classes[] = 'active ';
+  }
+  return $classes;
 }
 
-add_filter('nav_menu_css_class' , __NAMESPACE__ . '\\nav_menu_css_class' , 10 , 2);
+add_filter('nav_menu_css_class', __NAMESPACE__ . '\\nav_menu_css_class', 10, 2);
