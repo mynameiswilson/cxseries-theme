@@ -1,132 +1,146 @@
 # [Sage](https://roots.io/sage/)
-[![Build Status](https://travis-ci.org/roots/sage.svg)](https://travis-ci.org/roots/sage)
-[![devDependency Status](https://david-dm.org/roots/sage/dev-status.svg)](https://david-dm.org/roots/sage#info=devDependencies)
+[![Packagist](https://img.shields.io/packagist/vpre/roots/sage.svg?style=flat-square)](https://packagist.org/packages/roots/sage)
+[![devDependency Status](https://img.shields.io/david/dev/roots/sage.svg?style=flat-square)](https://david-dm.org/roots/sage#info=devDependencies)
+[![Build Status](https://img.shields.io/travis/roots/sage.svg?style=flat-square)](https://travis-ci.org/roots/sage)
 
-Sage is a WordPress starter theme based on HTML5 Boilerplate, gulp, Bower, and Bootstrap Sass, that will help you make better themes.
+Sage is a WordPress starter theme with a modern development workflow.
 
-* Source: [https://github.com/roots/sage](https://github.com/roots/sage)
-* Homepage: [https://roots.io/sage/](https://roots.io/sage/)
-* Documentation: [https://roots.io/sage/docs/](https://roots.io/sage/docs/)
-* Twitter: [@rootswp](https://twitter.com/rootswp)
-* Newsletter: [Subscribe](http://roots.io/subscribe/)
-* Forum: [https://discourse.roots.io/](https://discourse.roots.io/)
-
-## Requirements
-
-| Prerequisite    | How to check | How to install
-| --------------- | ------------ | ------------- |
-| PHP >= 5.4.x    | `php -v`     | [php.net](http://php.net/manual/en/install.php) |
-| Node.js 0.12.x  | `node -v`    | [nodejs.org](http://nodejs.org/) |
-| gulp >= 3.8.10  | `gulp -v`    | `npm install -g gulp` |
-| Bower >= 1.3.12 | `bower -v`   | `npm install -g bower` |
-
-For more installation notes, refer to the [Install gulp and Bower](#install-gulp-and-bower) section in this document.
+**Sage 9 is in active development and is only currently in alpha. The `master` branch tracks Sage 9 development. If you want a stable version, use the [latest Sage 8 release](https://github.com/roots/sage/releases/latest).**
 
 ## Features
 
-* [gulp](http://gulpjs.com/) build script that compiles both Sass and Less, checks for JavaScript errors, optimizes images, and concatenates and minifies files
-* [BrowserSync](http://www.browsersync.io/) for keeping multiple browsers and devices synchronized while testing, along with injecting updated CSS and JS into your browser while you're developing
-* [Bower](http://bower.io/) for front-end package management
-* [asset-builder](https://github.com/austinpray/asset-builder) for the JSON file based asset pipeline
-* [Bootstrap](http://getbootstrap.com/)
-* [Theme wrapper](https://roots.io/sage/docs/theme-wrapper/)
-* ARIA roles and microformats
-* Posts use the [hNews](http://microformats.org/wiki/hnews) microformat
-* [Multilingual ready](https://roots.io/wpml/) and over 30 available [community translations](https://github.com/roots/sage-translations)
+* Sass for stylesheets
+* ES6 for JavaScript
+* [Webpack](https://webpack.github.io/) for compiling assets, optimizing images, and concatenating and minifying files
+* [BrowserSync](http://www.browsersync.io/) for synchronized browser testing
+* [Bootstrap 4](http://getbootstrap.com/) for a front-end framework (can be removed or replaced)
+* [Laravel Blade](https://laravel.com/docs/5.3/blade) as a templating engine
 
-Install the [Soil](https://github.com/roots/soil) plugin to enable additional features:
+See a working example at [roots-example-project.com](https://roots-example-project.com/).
 
-* Cleaner output of `wp_head` and enqueued assets
-* Cleaner HTML output of navigation menus
-* Root relative URLs
-* Nice search (`/search/query/`)
-* Google CDN jQuery snippet from [HTML5 Boilerplate](http://html5boilerplate.com/)
-* Google Analytics snippet from [HTML5 Boilerplate](http://html5boilerplate.com/)
+## Requirements
 
-See a complete working example in the [roots-example-project.com repo](https://github.com/roots/roots-example-project.com).
+Make sure all dependencies have been installed before moving on:
+
+* [PHP](http://php.net/manual/en/install.php) >= 5.6.4
+* [Composer](https://getcomposer.org/download/)
+* [Node.js](http://nodejs.org/) >= 6.9.x
+* [Yarn](https://yarnpkg.com/en/docs/install)
 
 ## Theme installation
 
-Bottom line is you want to get the files in this repo into your local development environment. There are many ways to do this, two of which we will cover here.
+Install Sage using Composer from your WordPress themes directory (replace `your-theme-name` below with the name of your theme):
 
-### via Command-line
-
-If you're already [using Composer to manage WordPress](https://roots.io/using-composer-with-wordpress/), then you might consider using composer's `create-project` command to download Sage.
-
-The example below assumes you're using Bedrock. If you're not, simply change the target path accordingly.
-
-```sh
-composer create-project roots/sage web/app/themes/your-theme-name-here
+```shell
+# @ app/themes/ or wp-content/themes/
+$ composer create-project roots/sage your-theme-name dev-master
 ```
 
-Then activate the theme via [wp-cli](http://wp-cli.org/commands/theme/activate/).
+## Theme structure
 
-```sh
-wp theme activate your-theme-name-here
+```shell
+themes/your-theme-name/   # → Root of your Sage based theme
+├── assets                # → Front-end assets
+│   ├── config.json       # → Settings for compiled assets
+│   ├── build/            # → Webpack and ESLint config
+│   ├── fonts/            # → Theme fonts
+│   ├── images/           # → Theme images
+│   ├── scripts/          # → Theme JS
+│   └── styles/           # → Theme stylesheets
+├── composer.json         # → Autoloading for `src/` files
+├── composer.lock         # → Composer lock file (never edit)
+├── dist/                 # → Built theme assets (never edit)
+├── functions.php         # → Composer autoloader, theme includes
+├── index.php             # → Never manually edit
+├── node_modules/         # → Node.js packages (never edit)
+├── package.json          # → Node.js dependencies and scripts
+├── screenshot.png        # → Theme screenshot for WP admin
+├── src/                  # → Theme PHP
+│   ├── lib/Sage/         # → Blade implementation, asset manifest
+│   ├── admin.php         # → Theme customizer setup
+│   ├── filters.php       # → Theme filters
+│   ├── helpers.php       # → Helper functions
+│   └── setup.php         # → Theme setup
+├── style.css             # → Theme meta information
+├── templates/            # → Theme templates
+│   ├── layouts/          # → Base templates
+│   └── partials/         # → Partial templates
+└── vendor/               # → Composer packages (never edit)
 ```
-
-### via WordPress Admin Panel
-
-1. [Download the latest release](https://github.com/roots/sage/releases/latest) of Sage.
-2. In your WordPress admin panel, navigate to Appearance->Themes
-3. Click Add New
-4. Click Upload Theme
-5. Upload the zip file that you downloaded.
 
 ## Theme setup
 
-Edit `lib/setup.php` to enable or disable theme features, setup navigation menus, post thumbnail sizes, post formats, and sidebars.
+Edit `src/setup.php` to enable or disable theme features, setup navigation menus, post thumbnail sizes, post formats, and sidebars.
 
 ## Theme development
 
-Sage uses [gulp](http://gulpjs.com/) as its build system and [Bower](http://bower.io/) to manage front-end packages.
+Sage uses [Webpack](https://webpack.github.io/) as a build tool and [npm](https://www.npmjs.com/) to manage front-end packages.
 
-### Install gulp and Bower
+### Install dependencies
 
-Building the theme requires [node.js](http://nodejs.org/download/). We recommend you update to the latest version of npm: `npm install -g npm@latest`.
+From the command line on your host machine (not on your Vagrant development box), navigate to the theme directory then run `yarn`:
 
-From the command line:
-
-1. Install [gulp](http://gulpjs.com) and [Bower](http://bower.io/) globally with `npm install -g gulp bower`
-2. Navigate to the theme directory, then run `npm install`
-3. Run `bower install`
+```shell
+# @ example.com/site/web/app/themes/your-theme-name
+$ yarn
+```
 
 You now have all the necessary dependencies to run the build process.
 
-### Available gulp commands
+### Build commands
 
-* `gulp` — Compile and optimize the files in your assets directory
-* `gulp watch` — Compile assets when file changes are made
-* `gulp --production` — Compile assets for production (no source maps).
+* `yarn run start` — Compile assets when file changes are made, start Browsersync session
+* `yarn run build` — Compile and optimize the files in your assets directory
+* `yarn run build:production` — Compile assets for production
 
-### Using BrowserSync
+#### Additional commands
 
-To use BrowserSync during `gulp watch` you need to update `devUrl` at the bottom of `assets/manifest.json` to reflect your local development hostname.
+* `yarn run clean` — Remove your `dist/` folder
+* `yarn run lint` — Run eslint against your assets and build scripts
+* `composer test` — Check your PHP for code smells with `phpmd` and PSR-2 compliance with `phpcs`
 
-For example, if your local development URL is `http://project-name.dev` you would update the file to read:
+### Using Browsersync
+
+To use Browsersync you need to update `devUrl` at the bottom of `assets/config.json` to reflect your local development hostname.
+
+If your local development URL is `https://project-name.dev`, update the file to read:
 ```json
 ...
-  "config": {
-    "devUrl": "http://project-name.dev"
-  }
+  "devUrl": "https://project-name.dev",
 ...
 ```
-If your local development URL looks like `http://localhost:8888/project-name/` you would update the file to read:
+
+If you are not using [Bedrock](https://roots.io/bedrock/), update `publicPath` to reflect your folder structure:
+
 ```json
 ...
-  "config": {
-    "devUrl": "http://localhost:8888/project-name/"
-  }
+  "publicPath": "/wp-content/themes/sage/"
+...
+```
+
+By default, Browsersync will use webpack's [HMR](https://webpack.github.io/docs/hot-module-replacement.html), which won't trigger a page reload in your browser.
+
+If you would like to force Browsersync to reload the page whenever certain file types are edited, then add them to `watch` in `assets/config.json`.
+
+```json
+...
+  "watch": [
+    "assets/scripts/**/*.js",
+    "templates/**/*.php",
+    "src/**/*.php"
+  ],
 ...
 ```
 
 ## Documentation
 
-Sage documentation is available at [https://roots.io/sage/docs/](https://roots.io/sage/docs/).
+Sage 8 documentation is available at [https://roots.io/sage/docs/](https://roots.io/sage/docs/).
+
+Sage 9 documention is currently in progress and can be viewed at [https://github.com/roots/docs/tree/sage-9/sage](https://github.com/roots/docs/tree/sage-9/sage).
 
 ## Contributing
 
-Contributions are welcome from everyone. We have [contributing guidelines](CONTRIBUTING.md) to help you get started.
+Contributions are welcome from everyone. We have [contributing guidelines](https://github.com/roots/guidelines/blob/master/CONTRIBUTING.md) to help you get started.
 
 ## Community
 
@@ -136,3 +150,4 @@ Keep track of development and community news.
 * Follow [@rootswp on Twitter](https://twitter.com/rootswp)
 * Read and subscribe to the [Roots Blog](https://roots.io/blog/)
 * Subscribe to the [Roots Newsletter](https://roots.io/subscribe/)
+* Listen to the [Roots Radio podcast](https://roots.io/podcast/)
