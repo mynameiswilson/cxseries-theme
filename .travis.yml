@@ -18,6 +18,9 @@ cache:
   - bower_components
   - node_modules
 install:
+- . $HOME/.nvm/nvm.sh
+- nvm install stable
+- nvm use stable
 - npm install -g npm@latest
 - npm install -g bower gulp gulp-cssnano jscs
 - npm install
