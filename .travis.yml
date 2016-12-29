@@ -22,7 +22,7 @@ install:
 - nvm install stable
 - nvm use stable
 - npm install -g npm@latest
-- npm install -g bower gulp gulp-cssnano jscs
+- npm install -g bower gulp jscs
 - npm install
 - composer self-update && composer --version
 - export PATH="$HOME/.composer/vendor/bin:$PATH"
