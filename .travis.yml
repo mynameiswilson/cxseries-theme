@@ -19,9 +19,6 @@ cache:
   - bower_components
   - node_modules
 install:
-- . $HOME/.nvm/nvm.sh
-- nvm install stable
-- nvm use stable
 - npm install -g npm@latest
 - npm install -g bower gulp jscs
 - npm install
@@ -40,7 +37,7 @@ after_success:
 - tar -czf package.tgz build
 - export SSHPASS=$DEPLOY_PASS
 - sshpass -e scp package.tgz $DEPLOY_USER@$DEPLOY_HOST:$DEPLOY_PATH
-- sshpass -e ssh $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy.sh
+- sshpass -e ssh $DEPLOY_USER@$DEPLOY_HOST $DEPLOY_PATH/deploy-cxseries-theme.sh
 env:
   global:
   - secure: ktDjnTBDW7P1UnkucqGmBb5M3lU4HL3lj3HLiSGTZFC1U4tS/HuI9tuepazun+3zIw08TL5mVLKDWXrNzcozOX4cTUJj2ni5kb2HUykWnrQ5ogGePFyecNdYe+IXJw5eSKp+RvA25SQV0lopDih5iF2b6ucKiHziludupmc5Gq7RPbIN/6e4ZY5EXYSNoqEif3BY5wlQc6oAQzWLa/o3MAx8ChD26y3PfOqVGuQWIP1W0P6vHZVA6zEfV7D9c075K/GMunBl7wFPxRwwqjigHzZsv9BeYXCWGNq8oitncrqdvp7jpFCN69DpqVENCSfeTXggEajGCfeNQtQ02fF+NWtUSy7PZaAXQsRMtVcotZdC+2GV5VH9rjh10uTL3vdCqsqwM4FUeBq47QKBKnsdLxk14SkDKOlYqITjM3pdnoHMs4tVyv3qGcLdvaIbfcf+bP5J8L5xmAw6+Tjx5quWEXmOe+nmxngMBxAh0YBXWIn55b+b6Mt9SAScgNyNr2mLBr71kY2CX3N/vx5Z/DlLjTWFMGaR9gCNxdH1rTInaff29k+AUC/BcbF8JWK/koTozWe5B3q5M2W1DytNA7OBA991dnuaLgxrXCF09cNG8Wp5/T4GxzaNLdKuwm0GwLIc2WC3RMTSBkVi3NMuKWmSFt7KyqrmYFd3DV4utQAKz0U=
