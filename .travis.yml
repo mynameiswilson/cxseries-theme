@@ -1,7 +1,11 @@
 sudo: false
+dist: trusty
 language: php
+env:
+  - TRAVIS_NODE_VERSION="6"
+  - TRAVIS_NODE_VERSION="7"
 php:
-- 5.6
+  - 5.6
 matrix:
   allow_failures:
   - php: nightly
