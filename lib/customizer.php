@@ -50,10 +50,8 @@ function customize_register($wp_customize)
             )
         )
     );
-
-
-
 }
+
 add_action('customize_register', __NAMESPACE__ . '\\customize_register');
 
 /*
