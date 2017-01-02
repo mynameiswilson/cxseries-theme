@@ -19,15 +19,15 @@ cache:
   - bower_components
   - node_modules
 install:
-- . $HOME/.nvm/nvm.sh
-- nvm install stable
-- nvm use stable
-- npm install -g npm@latest
-- npm install -g bower gulp jscs
-- npm install
-- composer self-update && composer --version
-- export PATH="$HOME/.composer/vendor/bin:$PATH"
-- composer global require squizlabs/php_codesniffer
+  - . $HOME/.nvm/nvm.sh
+  - nvm install stable
+  - nvm use stable
+  - npm install -g npm@latest
+  - npm install -g bower gulp jscs
+  - npm install
+  - composer self-update && composer --version
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - composer global require squizlabs/php_codesniffer
 script:
 - npm run build
 - npm run jshint
