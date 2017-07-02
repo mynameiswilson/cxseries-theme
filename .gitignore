@@ -4,10 +4,7 @@ dist
 bower_components
 node_modules
 npm-debug.log
-<<<<<<< HEAD
-
 .DS_Store
-=======
 yarn-error.log
 vendor
->>>>>>> roots/master
+yarn.lock
