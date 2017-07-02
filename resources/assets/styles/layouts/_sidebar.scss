@@ -1,1 +1,25 @@
 // Sidebar
+.main {
+  @include make-col-ready();
+
+  @include media-breakpoint-up(sm) {
+    @include make-col($main-sm-columns);
+
+    .sidebar-primary & {
+      @include make-col($main-sm-columns - $sidebar-sm-columns);
+      @include float-left;
+    }
+  }
+}
+
+.sidebar {
+  @include make-col-ready();
+
+  @include media-breakpoint-up(sm) {
+    @include make-col($sidebar-sm-columns);
+  }
+
+  @include float-left;
+
+  margin-top: 3em;
+}
