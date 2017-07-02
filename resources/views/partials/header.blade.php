@@ -8,7 +8,9 @@
 
   <?php if (get_theme_mod('cxseries_logo')) : ?>
       <div class='site-logo'>
-          <a href='<?php echo esc_url(home_url('/')); ?>' title='<?php echo esc_attr(get_bloginfo('name', 'display')); ?>' rel='home'><img style="max-height: <?php echo get_theme_mod('cxseries_logo_height') ?>px" src='<?php echo esc_url(get_theme_mod('cxseries_logo')); ?>' alt='<?php echo esc_attr(get_bloginfo('name', 'display')); ?>'></a>
+          <a "navbar-brand" href="{{ home_url('/') }}" title="{{ get_bloginfo('name', 'display') }}" rel='home'>
+            <img style="max-height: <?php echo get_theme_mod('cxseries_logo_height') ?>px" src='<?php echo esc_url(get_theme_mod('cxseries_logo')); ?>' alt='<?php echo esc_attr(get_bloginfo('name', 'display')); ?>'>
+          </a>
       </div>
       <h1 class='site-title'><a href='<?php echo esc_url(home_url('/')); ?>' title='<?php echo esc_attr(get_bloginfo('name', 'display')); ?>' rel='home'><?php bloginfo('name'); ?></a></h1>
 
@@ -18,9 +20,6 @@
           <h2 class='site-description'><?php bloginfo('description'); ?></h2>
       </hgroup>
     <?php endif; ?>
-
-  <a class="navbar-brand" href="{{ home_url('/') }}">{{ get_bloginfo('name', 'display') }}</a>
-
 
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
