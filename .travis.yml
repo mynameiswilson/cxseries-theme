@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 sudo: false
 dist: trusty
 language: php
@@ -6,7 +7,23 @@ env:
   - TRAVIS_NODE_VERSION="7"
 php:
   - 5.6
+=======
+language: php
+sudo: false
+dist: trusty
+php:
+  - 7.1
+  - 7.0
+  - 5.6
+  - nightly
+
+env:
+  - TRAVIS_NODE_VERSION="6"
+  - TRAVIS_NODE_VERSION="7"
+
+>>>>>>> roots/master
 matrix:
+  fast_finish: true
   allow_failures:
   - php: nightly
 addons:
@@ -15,7 +32,9 @@ addons:
     - sshpass
   ssh_known_hosts: thelocust.org
 cache:
+  apt: true
   directories:
+<<<<<<< HEAD
   - bower_components
   - node_modules
 install:
@@ -48,3 +67,25 @@ env:
   - secure: f2W3OnO7t2VMYOAIBK1U2l7f/O40uta9kQPIinx5mKytCOy6MnBz54NLYIpptseg+n+fyD50s68NTRX2aDtyw7Fcm0SNDL6JpFzLDgpTTJpMGHCkzLn0FkGYO7yjnUip4DDJzmu6QsWnZRI/lRyqXjZdWEKHvZmv3BnAOAxBlYnEJ74bE2WwXy1nKgfEwNP5lT172jPAR+kDGw1YCwl+thssVIuiLj7jj2hJ5lAgMzCkcNAUAvrYCru6FUpSdwqR8pasNHUBrlhdjdSmzzB1yF5rZT/bVX77lspGJK4AGK59duIZCPjwiMO2fvlDMFdC3yDhNh1ar8a9fccp/S3/t2F9ixworl/aCLHBGeC4glaTn+w3EqjzAliYWpIvUE4MiYGyNJ0nyAa1MqG4wVip/YO5F3Tf/EOJb/+pTf/+cwVf1kv99H0Ua99vToFkTLUbIbUT7zHRD/qXF0NS8GjCYkvAkLZonaqYlxD6EtCb6GkFf7fPylvSfLxdoMnhEzn8pFRjgu03+wdHRq1UqhrjiQAdjpX5Z07Rga5qKYovSr4hV+X/boIXmhyCyObBV6PbSU3BdNxqKBB6KBGB3VK1rIZgFFcDBy8DVL1H7s/59Q1W65qEjciMTO9WUPnsEgbGnnfzE4L9zxgGIwB38EOqa1tNnqVx+oNLmCTBZuWYn/s=
   - secure: aM1whxNY4rwJjClYpYQxaWlBi+ex2PCSNTmB4w8H5zlCxhRN+7zJifG+Ekje+Da8Q+EFuj8XlOYY+rtD6kmn+TIU8oS+TapV+O7j31U1NviAMle47c36ZwKTjlzBE4YQ2X97mYSg77BydaCUeLYpFogVlnuY+dxP/muaH0i8lExvjte/DgZUFvEgRj9AECQaStDo+egtkMOoK4Od/EaPxHVKFOicbVMCPh67cBeAfqkXOf7mBq54ijO/ukzB8HscpjNKR+b/Ge3WojblsufvHyqXrYlWuhb/4v+vXXw28kDMG684uykCEncOz2M9TFYteL0hOCwz0Oq4+jNPSoTaiT3LaLx+apOTmnPun/NTvd/FEaSL1xw9GQJj2sabEwYXn7t0msIMhDIjYjsIgq7rx3C4AXFqYs0nzLICi6KfX3dpgp04IcN4IDjc3DNOUulndPCAPNqt9BV+Q9EiQdDj9FT8TQQwHmxi1cQWhUB0BXO4nrI8Ey6nKHqOy6i2MI+Eh3dtLNDowDq/HEfEtkUoZAjM0ZSz7fHlaeTyySBYVw4RHTG6jwsWKQXTf+M9qaFuY8rw5TJXh+6/oGJ3Ya4YiHy1ZN0wh8XBaTcgQEN5pAkrZCoGSt2tWTlpKSslRSwPr0dNRNi3xiHlbLsFpoPWht+bhrTEYQLKn/dRQHLrUv8=
   - secure: pbCGPvokTe5+zrakLKN1dICzY74Qy2KaCVjQjB/lXa80epsnInA7vUobG8HOwLIR31TkWgHXPlAJOzaSXlyG8a+GL7KgWak57H2HcZM/c8SKxFnEPHmU8Nn/YmPGPvyCHVqG0Mlj0lERca7ptbQFWFuJ/NdogP+z95xF3KfX8GncJjQOu5G5Zr2hPNPeXgMDq4zRQ6GMPZGNYhZhqXKGuBDMAnV5KPQgdpUgCfWKuzKippu95UygLmjzTEGs9dHIzNT10HHDh/9qsCrUHzMgiE3yVoJVl3BNvYVBkQuf43gl6C48S9+oEQ07Io98l07UVpLYWy2/MK205lmUz5CSgqFqnApVmCvlJMtMDQLVg5DnSdYCYjVMkqwT6jVY2LVPmCTz/gRAopQL3pkgzf1KeH2uUTDMABYY+LOuaYu2k/TrZYhm5XZkGRFnt98SZckGZWnyaGfhcPgJ3L3TtBwS9cg3IhCvCANGwjgutG/tLISzsqhyu9o2wf0z+C1zE2pz5RV1xM0h1UoeyWhXLS7R+NH3AAgOsiLBbAHN4Q7vgvss4OPv+Xd/SYwt81D3lhu44OyniRMhgr/o0v0dg1Q8tH+r7f3NbklRr//XQh9paaW5RPEH1hCHvXv1NtBkMUVof4YG8HvRd3CM71ZzwNQ/Z6OHelIHv+wEuiKq/jG/OuE=
+=======
+    - $HOME/.composer/cache
+    - $HOME/.yarn-cache
+    - vendor
+
+before_install:
+  - composer self-update
+  - source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION && nvm use $TRAVIS_NODE_VERSION
+  - export PATH=$HOME/.yarn/bin:$PATH && travis_retry curl -o- -L https://yarnpkg.com/install.sh | bash
+
+install:
+  - node -v && yarn -V
+  - travis_retry yarn
+  - composer install -o --prefer-dist --no-interaction
+
+script:
+  - yarn run test
+  - yarn run build
+  - yarn run rmdist
+  - yarn run "build:production"
+  - composer test
+>>>>>>> roots/master
