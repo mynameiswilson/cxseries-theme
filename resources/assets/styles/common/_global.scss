@@ -1,0 +1,39 @@
+// Base styles
+
+.main {
+  padding-top: 2em;
+}
+
+.cxseries_name {
+  font-size: 1.5em;
+}
+
+.cxseries_date {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.cxseries_race_sponsoredby {
+  font-style: italic;
+}
+
+.cxseries_race_details {
+  .cxseries_date,
+  .cxseries_location {
+    font-size: 1.5em;
+  }
+}
+
+.cxseries_race_links {
+  margin-bottom: 0.25em;
+}
+
+.cxseries_next_race {
+  font-size: 2em;
+}
+
+.cxseries_upcoming_races ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

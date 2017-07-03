@@ -1,0 +1,20 @@
+// Header
+
+.banner .nav li {
+  @extend .nav-item;
+}
+
+.banner .nav a {
+  @extend .nav-link;
+}
+
+.site-logo,
+.site-logo + .site-title {
+  display: inline-block;
+}
+
+.site-logo { margin-right: 0.5em; }
+
+.nav-primary {
+  margin-top: 0.5em;
+}
