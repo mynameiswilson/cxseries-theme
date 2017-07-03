@@ -8,3 +8,5 @@ npm-debug.log
 yarn-error.log
 vendor
 yarn.lock
+
+yarn.lock
